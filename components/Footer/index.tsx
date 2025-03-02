@@ -4,7 +4,9 @@ type Props = {}
 
 const Footer = (props: Props) => {
   return (
-    <div>Footer</div>
+    <div className='text-center text-[#72777b] p-5'>
+      <p>Next.js + React 实战</p>
+    </div>
   )
 }
 

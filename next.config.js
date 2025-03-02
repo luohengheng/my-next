@@ -2,7 +2,28 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['img1.mukewang.com'],
+    // remotePatterns: [
+    //   {
+    //     protocol: 'http',
+    //     hostname: 'baijiahao.baidu.com',
+    //     pathname: '/**',
+    //   },
+    //   {
+    //     protocol: 'http',
+    //     hostname: 't11.baidu.com',
+    //     pathname: '/**',
+    //   },
+    //   {
+    //     protocol: 'http',
+    //     hostname: 't12.baidu.com',
+    //     pathname: '/**',
+    //   },
+    //   {
+    //     protocol: 'http',
+    //     hostname: 't10.baidu.com',
+    //     pathname: '/**',
+    //   },
+    // ],
   },
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
 };

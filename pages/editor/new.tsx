@@ -7,7 +7,6 @@ import { Input, Button, message, Select } from 'antd';
 import { useRouter } from 'next/router';
 // import { useStore } from 'store/index';
 import request from 'service/fetch';
-import styles from './index.module.scss';
 
 const MDEditor = dynamic(() => import('@uiw/react-md-editor'), { ssr: false });
 
@@ -33,6 +32,9 @@ const NewEditor = () => {
             message.warning('请输入文章标题');
             return;
         }
+
+        push(`/user/111`)
+
         // request.post('/api/article/publish', {
         //   title,
         //   content,
@@ -90,7 +92,7 @@ const NewEditor = () => {
     );
 };
 
-(NewEditor as any).layout = null;
+NewEditor.layout = null
 
 export default NewEditor;
 // export default observer(NewEditor);

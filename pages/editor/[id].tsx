@@ -38,8 +38,8 @@ const MDEditor = dynamic(() => import('@uiw/react-md-editor'), { ssr: false });
 const ModifyEditor = ({ article }: IProps) => {
     const { push, query } = useRouter();
     const articleId = Number(query?.id)
-    const [title, setTitle] = useState(article?.title || '');
-    const [content, setContent] = useState(article?.content || '');
+    // const [title, setTitle] = useState(article?.title || '');
+    // const [content, setContent] = useState(article?.content || '');
     const [tagIds, setTagIds] = useState([]);
     const [allTags, setAllTags] = useState([]);
 
