@@ -2,28 +2,13 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    // remotePatterns: [
-    //   {
-    //     protocol: 'http',
-    //     hostname: 'baijiahao.baidu.com',
-    //     pathname: '/**',
-    //   },
-    //   {
-    //     protocol: 'http',
-    //     hostname: 't11.baidu.com',
-    //     pathname: '/**',
-    //   },
-    //   {
-    //     protocol: 'http',
-    //     hostname: 't12.baidu.com',
-    //     pathname: '/**',
-    //   },
-    //   {
-    //     protocol: 'http',
-    //     hostname: 't10.baidu.com',
-    //     pathname: '/**',
-    //   },
-    // ],
+    remotePatterns: [
+      // {
+      //   protocol: 'https',
+      //   hostname: 'www.imooc.com',
+      //   pathname: '/static/**',
+      // }
+    ],
   },
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
 };

@@ -1,0 +1,52 @@
+.title {
+    @apply text-3xl font-[bolder];
+}
+.user {
+    @apply flex justify-start items-center mb-10;
+}
+.user .info {
+    @apply ml-2.5;
+}
+.user .info .name {
+    @apply text-sm font-[bold];
+}
+.user .info .date {
+    @apply text-xs text-[#8a919f] flex;
+}
+.user .info .date div {
+    @apply mr-2.5;
+}
+.markdown img {
+    @apply w-full;
+}
+.divider {
+    @apply bg-[aliceblue] h-5;
+}
+.comment .enter {
+    @apply flex items-center;
+}
+.comment .enter .content {
+    @apply w-full ml-5;
+}
+.comment .enter .content button {
+    @apply mt-5;
+}
+.display {
+    @apply mt-20;
+}
+.display .wrapper {
+    @apply flex items-start mb-[50px];
+}
+.display .wrapper .info {
+    @apply flex flex-col w-full ml-5;
+}
+.display .wrapper .info .name {
+    @apply flex items-center justify-between text-[15px] font-[bold];
+}
+.display .wrapper .info .name .date {
+    @apply text-[#8a919f] font-[normal];
+}
+.display .wrapper .content {
+    @apply text-[#515767] mt-2.5;
+}
+  

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 interface IProps {
   time: number;
@@ -14,7 +14,9 @@ const CountDown = (props: IProps) => {
       setCount((count) => {
         if (count === 0) {
           clearInterval(id);
-          onEnd && onEnd();
+          setTimeout(() => {
+            onEnd && onEnd();
+          }, 0);
           return count;
         }
         return count - 1;
@@ -25,7 +27,7 @@ const CountDown = (props: IProps) => {
     };
   }, [time, onEnd]);
 
-  return <div className='text-[#909090]'>{count}</div>;
+  return <div className="text-[#909090]">{count}</div>;
 };
 
 export default CountDown;

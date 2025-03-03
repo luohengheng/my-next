@@ -1,24 +1,43 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import { INewItem } from '@/pages/index';
+import Link from "next/link";
+import Image from "next/image";
+import { IArticle } from "pages/interface";
+import { Avatar } from "antd";
+import { EyeOutlined } from "@ant-design/icons";
+import { markdownToTxt } from "markdown-to-txt";
+import styles from "./index.module.css";
+import { useRouter } from "next/router";
 
 interface IProps {
-    item: INewItem;
+  article: IArticle;
 }
-const ListItem = ({ item }: IProps) => {
+const ListItem = (props: IProps) => {
+  const { push } = useRouter();
+  const { article } = props;
+  const { user } = article;
 
-    return (
-        <Link href={'/article/11'}>
-            <div className='bg-white flex items-center justify-between cursor-pointer mx-[atuo] my-0 p-2.5'>
-                <div className='w-[90%]'>
-                    <div className='flex items-center mb-2.5'>
-                        <span className='text-[#4e5969] hover:underline hover:text-[#1e80ff]'>{item?.title}</span>
-                    </div>
-                    <Image src={item?.imgUrl} alt='' width={200} height={100} unoptimized />
-                </div>
-            </div>
-        </Link>
-    );
+  return (
+    <div
+      className={styles.container}
+      onClick={() => {
+        window.sessionStorage.setItem("articleId", JSON.stringify(article));
+        push(`/article/${article.id}`);
+      }}
+    >
+      <div className={styles.article}>
+        <div className={styles.userInfo}>
+          <span className={styles.name}>{user?.nickname}</span>
+          <span className={styles.date}>1990-01-01</span>
+        </div>
+        <h4 className={styles.title}>{article?.title}</h4>
+        <p className={styles.content}>{markdownToTxt(article?.content)}</p>
+        <div className={styles.statistics}>
+          <EyeOutlined />
+          <span className={styles.item}>{article?.views}</span>
+        </div>
+      </div>
+      <Avatar src={user?.avatar} size={48} />
+    </div>
+  );
 };
 
 export default ListItem;

@@ -1,61 +1,69 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import {Divider} from 'antd'
 import dynamic from 'next/dynamic';
 import requestInstance from 'service/fetch';
-
-export interface INewItem {
-  url: string;
-  title: string;
-  time: string;
-  imgUrl: string
-}
+import styles from './index.module.css';
+import { IArticle } from './interface';
+import { observer } from 'mobx-react-lite';
+import { useStore } from 'store';
 
 interface IProps { 
-  list: INewItem[]
+  articles: IArticle[];
+  tags: { id: number; title: string }[];
 }
 
-const DynamicComponent = dynamic(() => import('@/components/ListItem'));
+const DynamicComponent = dynamic(() => import('components/ListItem'));
 
-export const getServerSideProps = async () => {
-  const url = 'https://news.baidu.com/widget?id=LocalNews&ajax=json&t=1740888309889';
+// export const getServerSideProps = async () => {
+//   return {
+//     props: {
+//       articles: [],
+//       tags: []
+//     }
+//   }
+// }
 
-  const response = await requestInstance(url);
-  console.log('list', response?.data?.LocalNews?.data?.rows?.first)
+const Home = (props: IProps) => {
+  const tags = [{id: 1, title: '标签1'}, {id: 2, title: '标签2'}];
+  const { article } = useStore();
+  const [selectTag, setSelectTag] = useState(1);
+  const [allArticles] = useState([...article.articleInfoArr]);
+  const [showAricles, setShowAricles] = useState([...article.articleInfoArr]);
 
-  return {
-    props: {
-      list: response?.data?.LocalNews?.data?.rows?.first || []
-    }
-  }
-}
+  const handleSelectTag = (event: any) => {
+    const { tagid } = event?.target?.dataset || {};
+    setSelectTag(Number(tagid));
+  };
 
-const Home = ({list}: IProps) => {
+  // 过滤出对应标签的文章
+  useEffect(() => {
+    const newArticles = allArticles.filter((item) => item.tagIds.includes(selectTag));
+    setShowAricles(newArticles);
+  }, [selectTag, allArticles]);
+
   return (
     <div>
-      {/* <div className="h-10 text-center flex items-center justify-center" onClick={handleSelectTag}>
-        {tags?.map((tag) => (
-          <div
-            key={tag?.id}
-            data-tagid={tag?.id}
-            className={
-              `h-[30px] bg-white flex items-center text-xs cursor-pointer mr-2.5 p-2.5 rounded-[5px]
-              ${selectTag === tag?.id ? 'bg-[#007fff] text-white' : ''}`}
-          >
-            {tag?.title}
-          </div>
-        ))}
-      </div> */}
-      <div className="content-layout">
-        {list?.map((item, index) => (
-          <div key={index}>
-            {/* <ListItem article={article} /> */}
-            <DynamicComponent item={item} />
-            <Divider />
-          </div>
-        ))}
-      </div>
+    <div className={styles.tags} onClick={handleSelectTag}>
+      {tags?.map((tag) => (
+        <div
+          key={tag?.id}
+          data-tagid={tag?.id}
+          className={`${styles.tag} ${selectTag === tag?.id ? styles.active : ''}`}
+        >
+          {tag?.title}
+        </div>
+      ))}
     </div>
+    <div className="content-layout">
+      {showAricles?.map((article) => (
+        <div key={article?.id}>
+          <DynamicComponent article={article} />
+          <Divider />
+        </div>
+      ))}
+    </div>
+  </div>
   )
 }
 
-export default Home
+export default observer(Home)

@@ -1,0 +1,9 @@
+.tags {
+    @apply h-10 text-center flex items-center justify-center;
+}
+.tags .tag {
+    @apply h-[30px] bg-white flex items-center text-xs cursor-pointer mr-2.5 p-2.5 rounded-[5px];
+}
+.tags .active {
+    @apply bg-[#007fff] text-white;
+}

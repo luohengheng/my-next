@@ -1,21 +1,15 @@
-export type IUserInfo = {
-    userId?: number | null,
-    nickname?: string,
-    avatar?: string,
-    id?: number
-}
-
-export interface IUserStore {
-    userInfo: IUserInfo;
-    setUserInfo: (value: IUserInfo) => void;
-}
-
+import { IUserInfo, IUserStore } from "pages/interface";
 const userStore = (): IUserStore => {
     return {
-        userInfo: {},
+        userInfo: {
+            id: 0,
+            userId: 1,
+            nickname: "测试数据",
+            avatar: "https://www.imooc.com/static/img/index/logo2020.png",
+        },
         setUserInfo: function (value) {
             this.userInfo = value
-        } 
+        }
     }
 }
 

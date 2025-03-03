@@ -1,0 +1,30 @@
+.container {
+    @apply bg-white flex items-center justify-between cursor-pointer mx-[atuo] my-0 p-2.5;
+}
+.container .article {
+    @apply w-[90%];
+}
+.container .article .userInfo {
+    @apply flex items-center mb-2.5;
+}
+.container .article .userInfo span {
+    @apply px-2.5 py-0 border-r-[#e5e6eb] border-r border-solid first-of-type:pl-0 last-of-type:border-r-0;
+}
+.container .article .userInfo .name {
+    @apply text-[#4e5969] hover:underline hover:text-[#1e80ff];
+}
+.container .article .userInfo .date {
+    @apply text-[#86909c];
+}
+.container .article .title {
+    @apply text-xl overflow-hidden text-ellipsis whitespace-nowrap;
+}
+.container .article .content {
+    @apply text-base text-[#86909c] overflow-hidden text-ellipsis whitespace-nowrap;
+}
+.container .article .statistics {
+    @apply flex items-center;
+}
+.container .article .statistics .item {
+    @apply ml-[5px];
+}

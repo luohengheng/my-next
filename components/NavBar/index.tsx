@@ -1,19 +1,27 @@
 import React, { useState } from 'react'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useStore } from 'store/index'
 import { navs } from './config'
-import { Button } from 'antd'
-import Login from '@/components/Login'
+import { Button, Dropdown, Avatar, message } from 'antd'
+import { LoginOutlined, HomeOutlined } from '@ant-design/icons';
+import Login from 'components/Login'
+import { observer } from 'mobx-react-lite'
 
 interface IProp {
 }
 
 const NavBar = (props: IProp) => {
   const { pathname, push } = useRouter();
+  const store = useStore() 
+  const { userId, avatar } = store.user.userInfo;
   const [isShowLogin, setIsShowLogin] = useState(false)
 
   const navClick = (item: string) => {
-    push(item)
+    if (userId) {
+      push(item);
+    } else {
+      message.warning('请先登录');
+    }
   }
 
   const handleGotoEditorPage = () => {
@@ -26,6 +34,38 @@ const NavBar = (props: IProp) => {
 
   const handleClose = () => {
     setIsShowLogin(false)
+  }
+
+  const handleLogout = () => {
+    store.user.setUserInfo({});
+  };
+
+  const handleGotoPersonalPage = () => {
+    push(`/user/${userId}`);
+  };
+
+  const renderDropDownMenu = () => {
+    return {
+      items: [
+        {
+          key: '1',
+          label: (
+            <div onClick={handleGotoPersonalPage}>
+              <HomeOutlined />
+              个人主页
+            </div>
+          ),
+        },{
+          key: '2',
+          label: (
+            <div onClick={handleLogout}>
+              <LoginOutlined />
+              退出系统
+            </div>
+          ),
+        },
+      ]
+    }
   }
 
   return (
@@ -42,9 +82,18 @@ const NavBar = (props: IProp) => {
 
       <div className='ml-[150px]'>
         <Button className='mr-5' onClick={handleGotoEditorPage}>写文章</Button>
-        <Button className='mr-5' type="primary" onClick={handleLogin}>
-          登录
-        </Button>
+
+        {userId ? (
+          <>
+            <Dropdown menu={renderDropDownMenu()} placement="bottomLeft">
+              <Avatar src={avatar} size={32} />
+            </Dropdown>
+          </>
+        ) : (
+          <Button  className='mr-5' type="primary" onClick={handleLogin}>
+            登录
+          </Button>
+        )}
       </div>
       
       <Login isShow={isShowLogin} onClose={handleClose} />
@@ -52,4 +101,4 @@ const NavBar = (props: IProp) => {
   )
 }
 
-export default NavBar
+export default observer(NavBar)
