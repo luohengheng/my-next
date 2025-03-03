@@ -79,7 +79,7 @@ const UserDetail = (props: any) => {
   const store = useStore();
   const { userInfo = {} } = store.user;
   const articles = store.article.articleInfoArr.filter(
-    (i) => i.userId === Number(id)
+    (i) => i.user.userId === Number(id)
   );
   const viewsCount = articles?.reduce(
     (prev: any, next: any) => prev + next?.views,

@@ -1,4 +1,4 @@
-import { IUserInfo, IUserStore } from "pages/interface";
+import { IUserStore } from "pages/interface";
 const userStore = (): IUserStore => {
     return {
         userInfo: {

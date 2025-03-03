@@ -14,7 +14,6 @@ const NewEditor = () => {
   const store = useStore();
   const { push } = useRouter();
   const { userId } = store.user.userInfo;
-  const { setArticleInfoArr } = store.article;
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [tagIds, setTagIds] = useState([]);
@@ -32,10 +31,17 @@ const NewEditor = () => {
 
     console.log(title, content, tagIds);
     store.article.setArticleInfoArr({
+      id: store.article.articleInfoArr.length + 1,
       title,
       content,
       tagIds,
-      userId: userId as number
+      views: 0,
+      create_time: '1111-11-11',
+      update_time: '1111-11-11',
+      user: {
+        userId: userId as number
+      },
+      comments: []
     })
     userId ? push(`/user/${userId}`) : push('/')
   };

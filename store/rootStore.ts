@@ -1,4 +1,5 @@
-import userStore, {IUserStore} from "./userSrtore";
+import userStore from "./userSrtore";
+import {IUserStore} from "pages/interface";
 import articleStore, {IArticleStore} from "./articleStore";
 
 export interface IStore {

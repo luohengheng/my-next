@@ -1,5 +1,3 @@
-import { IUserInfo } from 'store/userSrtore';
-
 export type IComment = {
   id: number,
   content: string,

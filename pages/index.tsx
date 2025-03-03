@@ -14,16 +14,16 @@ interface IProps {
 
 const DynamicComponent = dynamic(() => import('components/ListItem'));
 
-// export const getServerSideProps = async () => {
-//   return {
-//     props: {
-//       articles: [],
-//       tags: []
-//     }
-//   }
-// }
+export const getServerSideProps = async () => {
+  return {
+    props: {
+      name: 'lwh'
+    }
+  }
+}
 
 const Home = (props: IProps) => {
+  console.log(props);
   const tags = [{id: 1, title: '标签1'}, {id: 2, title: '标签2'}];
   const { article } = useStore();
   const [selectTag, setSelectTag] = useState(1);
